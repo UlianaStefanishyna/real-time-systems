@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+spring:
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+
+logging:
+  level:
+    com:
+      real:
+        time:
+          systems: DEBUG
