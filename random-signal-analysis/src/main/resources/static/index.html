@@ -1,6 +1,88 @@
+<!--<html lang="EN">-->
+<!--<header><title>app</title></header>-->
+<!--<body>-->
+<!--Sping Boot Application is running and listening port 8080-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE HTML>
 <html>
-<header><title>app</title></header>
+<head>
+    <script type="text/javascript">
+        window.onload = function () {
+
+            // var xhr = new XMLHttpRequest();
+            // xhr.open('GET', '/api/healthcheck', false);
+            // xhr.send();
+            // if (xhr.status !== 200) {
+            //     alert( xhr.status + ': ' + xhr.statusText ); // пример вывода: 404: Not Found
+            // } else {
+            //     alert( xhr.responseText ); // responseText -- текст ответа.
+            // }
+
+            var chart1 = new CanvasJS.Chart("chartContainer1",{
+                title :{
+                    text: "Live Data"
+                },
+                data: [{
+                    type: "line",
+                    dataPoints : [
+                        { label: "apple",  y: 10  },
+                        { label: "orange", y: 15  },
+                        { label: "banana", y: 25  },
+                        { label: "mango",  y: 30  },
+                        { label: "grape",  y: 28  }
+                    ]
+                }]
+            });
+            var chart2 = new CanvasJS.Chart("chartContainer2",{
+                title :{
+                    text: "Live Data"
+                },
+                data: [{
+                    type: "column",
+                    dataPoints : [
+                        { label: "apple",  y: 10  },
+                        { label: "orange", y: 15  },
+                        { label: "banana", y: 25  },
+                        { label: "mango",  y: 30  },
+                        { label: "grape",  y: 28  }
+                    ]
+                }]
+            });
+
+            var chart3 = new CanvasJS.Chart("chartContainer3",
+                {
+                    title :{
+                        text: "Live Data"
+                    },
+                    data: [{
+                        type: "area",
+                        dataPoints : [
+                            { label: "apple",  y: 10  },
+                            { label: "orange", y: 15  },
+                            { label: "banana", y: 25  },
+                            { label: "mango",  y: 30  },
+                            { label: "grape",  y: 28  }
+                        ]
+                    }]
+        });
+
+            chart1.render();
+            chart2.render();
+            chart3.render();
+
+
+
+        }
+    </script>
+</head>
 <body>
-Sping Boot Application is running and listening port 8080
+<!--<div id="chartContainer" style="height: 370px; width: 100%;"></div>-->
+
+<div id="chartContainer1" style="height: 370px; width: 100%;"></div>
+<div id="chartContainer2" style="height: 370px; width: 100%;"></div>
+<div id="chartContainer3" style="height: 370px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"> </script>
 </body>
 </html>

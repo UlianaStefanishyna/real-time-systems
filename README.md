@@ -1,4 +1,4 @@
-# Real-time-systems
+# Real time systems
 
 - Spring Boot
 - Maven
