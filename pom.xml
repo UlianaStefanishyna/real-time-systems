@@ -65,8 +65,22 @@
         </dependency>
     </dependencies>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.real.time.systems</groupId>
+                <artifactId>exception-service</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+        </dependencies>
+
+    </dependencyManagement>
+
+
     <modules>
-        <module>random-signal-analysis</module>
+        <module>business/random-signal-analysis</module>
+
+        <module>utilities/exception-service</module>
     </modules>
 
 </project>
