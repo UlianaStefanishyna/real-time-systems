@@ -9,7 +9,7 @@
 ##
 # <img src="https://raw.githubusercontent.com/UlianaStefanishyna/attachments-recource/master/image/task.png" height="500" width="500" align="middle"/>
 
-### Mathematical expectation of signal
+### Mathematical expectation of the signal
 # <img src="https://raw.githubusercontent.com/UlianaStefanishyna/attachments-recource/master/image/signal-analisys.png" height="400" width="500"/>
 
 

@@ -11,7 +11,7 @@
     <script type="text/javascript">
         window.onload = function () {
 
-            // var xhr = new XMLHttpRequest();
+            var xhr = new XMLHttpRequest();
             // xhr.open('GET', '/api/healthcheck', false);
             // xhr.send();
             // if (xhr.status !== 200) {
@@ -20,65 +20,86 @@
             //     alert( xhr.responseText ); // responseText -- текст ответа.
             // }
 
-            var chart1 = new CanvasJS.Chart("chartContainer1",{
-                title :{
-                    text: "Live Data"
-                },
-                data: [{
-                    type: "line",
-                    dataPoints : [
-                        { label: "apple",  y: 10  },
-                        { label: "orange", y: 15  },
-                        { label: "banana", y: 25  },
-                        { label: "mango",  y: 30  },
-                        { label: "grape",  y: 28  }
-                    ]
-                }]
-            });
-            var chart2 = new CanvasJS.Chart("chartContainer2",{
-                title :{
-                    text: "Live Data"
-                },
-                data: [{
-                    type: "column",
-                    dataPoints : [
-                        { label: "apple",  y: 10  },
-                        { label: "orange", y: 15  },
-                        { label: "banana", y: 25  },
-                        { label: "mango",  y: 30  },
-                        { label: "grape",  y: 28  }
-                    ]
-                }]
-            });
+            xhr.open("POST", "/chart", true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify({
+                "amount_of_harmonic": 14,
+                "points_amount": 64,
+                "frequency": 2000
+            }));
 
-            var chart3 = new CanvasJS.Chart("chartContainer3",
-                {
-                    title :{
-                        text: "Live Data"
-                    },
-                    data: [{
-                        type: "area",
-                        dataPoints : [
-                            { label: "apple",  y: 10  },
-                            { label: "orange", y: 15  },
-                            { label: "banana", y: 25  },
-                            { label: "mango",  y: 30  },
-                            { label: "grape",  y: 28  }
-                        ]
-                    }]
-        });
+            // console.log(xhr.responseText);
+            xhr.onreadystatechange = processRequest;
 
-            chart1.render();
-            chart2.render();
-            chart3.render();
+            function processRequest(e) {
+                var response=JSON.stringify(e);
+                alert(response);
+            }
+            // if (this.status === 200) {
+            //     var data = JSON.parse(xhr.responseText);
+            //     console.log("Request complete! response:", data);
+            //     alert(data)
+            // }
+
+        //     var chart1 = new CanvasJS.Chart("chartContainer1",{
+        //         title :{
+        //             text: "Live Data"
+        //         },
+        //         data: [{
+        //             type: "line",
+        //             dataPoints : [
+        //                 { label: "apple",  y: 10  },
+        //                 { label: "orange", y: 15  },
+        //                 { label: "banana", y: 25  },
+        //                 { label: "mango",  y: 30  },
+        //                 { label: "grape",  y: 28  }
+        //             ]
+        //         }]
+        //     });
+        //     var chart2 = new CanvasJS.Chart("chartContainer2",{
+        //         title :{
+        //             text: "Live Data"
+        //         },
+        //         data: [{
+        //             type: "column",
+        //             dataPoints : [
+        //                 { label: "apple",  y: 10  },
+        //                 { label: "orange", y: 15  },
+        //                 { label: "banana", y: 25  },
+        //                 { label: "mango",  y: 30  },
+        //                 { label: "grape",  y: 28  }
+        //             ]
+        //         }]
+        //     });
+        //
+        //     var chart3 = new CanvasJS.Chart("chartContainer3",
+        //         {
+        //             title :{
+        //                 text: "Live Data"
+        //             },
+        //             data: [{
+        //                 type: "area",
+        //                 dataPoints : [
+        //                     { label: "apple",  y: 10  },
+        //                     { label: "orange", y: 15  },
+        //                     { label: "banana", y: 25  },
+        //                     { label: "mango",  y: 30  },
+        //                     { label: "grape",  y: 28  }
+        //                 ]
+        //             }]
+        // });
+
+            // chart1.render();
+            // chart2.render();
+            // chart3.render();
 
         }
     </script>
 </head>
 <body>
-<div id="chartContainer1" style="height: 370px; width: 100%;"></div>
-<div id="chartContainer2" style="height: 370px; width: 100%;"></div>
-<div id="chartContainer3" style="height: 370px; width: 100%;"></div>
+<!--<div id="chartContainer1" style="height: 370px; width: 100%;"></div>-->
+<!--<div id="chartContainer2" style="height: 370px; width: 100%;"></div>-->
+<!--<div id="chartContainer3" style="height: 370px; width: 100%;"></div>-->
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"> </script>
 </body>
 </html>

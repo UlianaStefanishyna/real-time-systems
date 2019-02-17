@@ -4,10 +4,10 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
-import java.util.Map;
 
 @Data
 @Builder
-public class RandomSignalResponseDto {
-    private Map<Double, DiscretePoint> timeDiscretePoints;
+public class DiscretePoint {
+    private List<Harmonic> harmonics;
+    private double value;
 }
