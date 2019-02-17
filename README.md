@@ -3,7 +3,7 @@
 1. Random signal service
 
 image
-![image] (../assets/image/task.png?raw=true)
+![image] (../assets/random-signal-analysis/image/task.png?raw=true)
 
 [GitHub](http://github.com)
 
