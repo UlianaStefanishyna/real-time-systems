@@ -1,10 +1,3 @@
-<!--<html lang="EN">-->
-<!--<header><title>app</title></header>-->
-<!--<body>-->
-<!--Sping Boot Application is running and listening port 8080-->
-<!--</body>-->
-<!--</html>-->
-
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -21,8 +14,7 @@
                 "frequency": 2000
             }));
 
-            xhr.onreadystatechange = (e) =>
-            {
+            xhr.onreadystatechange = (e) =>{
                 var arr = [];
                 console.log(xhr.responseText);
                 var jsonData = JSON.parse(xhr.responseText);
@@ -48,6 +40,7 @@
             }
         }
     </script>
+    <title>chart</title>
 </head>
 <body>
 <div id="chartContainer" style="height: 370px; width: 100%;"></div>
