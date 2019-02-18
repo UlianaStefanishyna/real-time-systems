@@ -25,7 +25,7 @@ public class RandomSignalServiceImpl implements RandomSignalService {
     private BiFunction<Double, Integer, Double> calculateHarmonic = (frequency, time) -> {
         double amplitude = ThreadLocalRandom.current().nextDouble(0.1, 10.0);
         double phase = ThreadLocalRandom.current().nextDouble(0, 360);
-        return amplitude * Math.sin(frequency * time * phase);
+        return amplitude * Math.sin(frequency * time + phase);
     };
 
 //    public static void main(String[] args) {
