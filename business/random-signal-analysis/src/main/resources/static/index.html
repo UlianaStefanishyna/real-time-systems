@@ -3,26 +3,26 @@
 <head>
     <script type="text/javascript">
         // window.onload =
-            function autoFill() {
+        function autoFill() {
 
             var xhr = new XMLHttpRequest();
-            var n = document.getElementsByName("input1");
+            var n = document.getElementById("input1");
             var frequency = document.getElementById("input4");
             var pointsAmount = document.getElementById("input3");
 
             xhr.open("POST", "/chart", true);
             xhr.setRequestHeader('Content-Type', 'application/json');
-                var body = JSON.stringify({
-                    "amount_of_harmonic": n,
-                    "points_amount": pointsAmount,
-                    "frequency": frequency
-                });
-                console.log(body);
-                xhr.send(body);
+            var body = JSON.stringify({
+                "amount_of_harmonic": +n.value,
+                "points_amount": +pointsAmount.value,
+                "frequency": +frequency.value
+            });
+            console.log(body);
+            xhr.send(body);
 
             xhr.onreadystatechange = (e) =>{
                 var arr = [];
-                // console.log(xhr.responseText);
+                console.log(xhr.responseText);
                 var jsonData = JSON.parse(xhr.responseText);
                 for (var i = 0; i < jsonData.points.length; i++) {
                     var point = jsonData.points[i];
@@ -32,7 +32,7 @@
                         y: point.value
                     });
                 }
-                // console.log(arr);
+                console.log(arr);
                 var chart1 = new CanvasJS.Chart("chartContainer", {
                     title: {
                         text: "Harmonics data"
@@ -49,10 +49,10 @@
     <title>chart</title>
 </head>
 <body>
-<a href="#" onClick="autoFill(); return true;" >Click to Autofill</a>
+<a href="#" onClick="autoFill(); return true;">Click to Autofill</a>
 <form>
     <p>
-        <label>Amount of harmonics:  &#8195;</label>
+        <label>Amount of harmonics: &#8195;</label>
         <input value="14" type="number" id="input1" width="10">
     </p>
     <p>
@@ -64,18 +64,18 @@
         <input value="256" type="number" id="input3" maxlength="20">
     </p>
     <!--<p>-->
-        <!--<label>Dropdown Input: </label>-->
-        <!--<select id="input2">-->
-            <!--<option value="Dropdown1">First Option</option>-->
-            <!--<option value="Dropdown2">Second Option</option>-->
-            <!--<option value="Dropdown3">Third Option</option>-->
-        <!--</select>-->
+    <!--<label>Dropdown Input: </label>-->
+    <!--<select id="input2">-->
+    <!--<option value="Dropdown1">First Option</option>-->
+    <!--<option value="Dropdown2">Second Option</option>-->
+    <!--<option value="Dropdown3">Third Option</option>-->
+    <!--</select>-->
     <!--</p>-->
     <!--<p>-->
-        <!--<label>Radio Input: </label>-->
-        <!--<input type="radio" name="input3" value="Radio1">First Radio-->
-        <!--<input type="radio" name="input3" value="Radio2">Second Radio-->
-        <!--<input type="radio" name="input3" value="Radio3">Third Radio-->
+    <!--<label>Radio Input: </label>-->
+    <!--<input type="radio" name="input3" value="Radio1">First Radio-->
+    <!--<input type="radio" name="input3" value="Radio2">Second Radio-->
+    <!--<input type="radio" name="input3" value="Radio3">Third Radio-->
     <!--</p>-->
 </form>
 <!--<label for="curso"></label><input id="curso" maxlength="60" name="curso" size="20" type="text">-->
