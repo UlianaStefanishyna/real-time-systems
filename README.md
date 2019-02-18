@@ -18,3 +18,4 @@
 * **Spring Boot**
 * **Maven**
 * **Java 10**
+* **JS Canvas**
