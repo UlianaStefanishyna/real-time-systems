@@ -2,7 +2,6 @@
 <html>
 <head>
     <script type="text/javascript">
-        // window.onload =
         function autoFill() {
 
             var xhr = new XMLHttpRequest();
@@ -38,7 +37,7 @@
                         text: "Harmonics data"
                     },
                     data: [{
-                        type: "line", // "area", "column"
+                        type: "area", // "area", "column"
                         dataPoints: arr
                     }]
                 });
@@ -63,20 +62,6 @@
         <label>Amount of points: &#8195;&#8195;&#8195;</label>
         <input value="256" type="number" id="input3" maxlength="20">
     </p>
-    <!--<p>-->
-    <!--<label>Dropdown Input: </label>-->
-    <!--<select id="input2">-->
-    <!--<option value="Dropdown1">First Option</option>-->
-    <!--<option value="Dropdown2">Second Option</option>-->
-    <!--<option value="Dropdown3">Third Option</option>-->
-    <!--</select>-->
-    <!--</p>-->
-    <!--<p>-->
-    <!--<label>Radio Input: </label>-->
-    <!--<input type="radio" name="input3" value="Radio1">First Radio-->
-    <!--<input type="radio" name="input3" value="Radio2">Second Radio-->
-    <!--<input type="radio" name="input3" value="Radio3">Third Radio-->
-    <!--</p>-->
 </form>
 <!--<label for="curso"></label><input id="curso" maxlength="60" name="curso" size="20" type="text">-->
 <!--<label for="curso1"></label><input id="curso1" maxlength="60" name="curso" size="20" type="text">-->

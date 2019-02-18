@@ -16,7 +16,7 @@ public class RandomSignalServiceImpl implements RandomSignalService {
     @Override
     public RandomSignalResponseDto calculate(int amountOfHarmonic, int pointsAmount, double frequency) {
         return RandomSignalResponseDto.builder()
-                .points(IntStream.rangeClosed(1, pointsAmount).boxed().map(time -> Point.builder()
+                .points(IntStream.rangeClosed(1, pointsAmount).mapToObj(time -> Point.builder()
                         .value(IntStream.rangeClosed(1, amountOfHarmonic)
                                 .mapToDouble(p -> calculateHarmonic.apply(frequency, time)).sum())
                         .time(time).build()).collect(Collectors.toList())).build();
