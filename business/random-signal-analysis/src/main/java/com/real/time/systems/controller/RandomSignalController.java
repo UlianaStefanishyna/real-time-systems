@@ -29,6 +29,6 @@ public class RandomSignalController {
         RandomSignalResponseDto calculate = this.randomSignalService
                 .calculate(request.getAmountOfHarmonic(), request.getPointsAmount(), request.getFrequency());
 //        log.info("calculate={}", calculate);
-        return ResponseEntity.ok("DAA");
+        return ResponseEntity.ok(calculate);
     }
 }

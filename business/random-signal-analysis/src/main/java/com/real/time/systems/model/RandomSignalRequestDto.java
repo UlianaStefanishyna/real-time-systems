@@ -12,7 +12,7 @@ public class RandomSignalRequestDto {
     private int amountOfHarmonic;
 
     @NotNull
-    private long pointsAmount;
+    private int pointsAmount;
 
     @NotNull
     private double frequency;

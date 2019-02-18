@@ -9,5 +9,5 @@ import java.util.Map;
 @Data
 @Builder
 public class RandomSignalResponseDto {
-    private Map<Double, DiscretePoint> timeDiscretePoints;
+    private List<DiscretePoint> timeDiscretePoints;
 }

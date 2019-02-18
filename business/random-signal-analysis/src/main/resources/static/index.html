@@ -23,18 +23,20 @@
             xhr.open("POST", "/chart", true);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(JSON.stringify({
-                "amount_of_harmonic": 14,
-                "points_amount": 64,
+                "amount_of_harmonic": 2,
+                "points_amount": 10,
                 "frequency": 2000
             }));
 
             // console.log(xhr.responseText);
-            xhr.onreadystatechange = processRequest;
+            xhr.onreadystatechange=(e)=> {
+                console.log(xhr.responseText);
+            }
 
-            function processRequest(e) {
+/*            function processRequest(e) {
                 var response=JSON.stringify(e);
                 alert(response);
-            }
+            }*/
             // if (this.status === 200) {
             //     var data = JSON.parse(xhr.responseText);
             //     console.log("Request complete! response:", data);
