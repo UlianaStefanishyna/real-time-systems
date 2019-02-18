@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class DiscretePoint {
-    private int timePoint;
+public class Point {
+    private int time;
     private double value;
 }
