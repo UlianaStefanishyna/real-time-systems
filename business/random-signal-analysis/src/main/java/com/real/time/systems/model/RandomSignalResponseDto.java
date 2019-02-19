@@ -9,4 +9,6 @@ import java.util.List;
 @Builder
 public class RandomSignalResponseDto {
     private List<Point> points;
+    private double mathematicalExpectation;
+    private double dispersion;
 }

@@ -6,6 +6,9 @@ import com.real.time.systems.service.RandomSignalService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.BiFunction;
 import java.util.stream.*;
@@ -16,10 +19,11 @@ public class RandomSignalServiceImpl implements RandomSignalService {
     @Override
     public RandomSignalResponseDto calculate(int amountOfHarmonic, int pointsAmount, double frequency) {
         return RandomSignalResponseDto.builder()
-                .points(IntStream.rangeClosed(1, pointsAmount).mapToObj(time -> Point.builder()
-                        .value(IntStream.rangeClosed(1, amountOfHarmonic)
-                                .mapToDouble(p -> calculateHarmonic.apply(frequency, time)).sum())
-                        .time(time).build()).collect(Collectors.toList())).build();
+                .points(IntStream.rangeClosed(0, pointsAmount).mapToObj(time -> {
+                    double sum = IntStream.rangeClosed(1, amountOfHarmonic)
+                            .mapToDouble(p -> calculateHarmonic.apply(frequency, time)).sum();
+                    return Point.builder().value(sum).time(time).build();
+                }).collect(Collectors.toList())).build();
     }
 
     private BiFunction<Double, Integer, Double> calculateHarmonic = (frequency, time) -> {
@@ -28,6 +32,16 @@ public class RandomSignalServiceImpl implements RandomSignalService {
         return amplitude * Math.sin(frequency * time + phase);
     };
 
+//    public static void main(String[] args) {
+//        List<Integer> numbers = Arrays.asList(1, 2, 3);
+//
+//        // 1*10 + 2*10 + 3*10
+//        Optional<Integer> sum = numbers.stream()
+//                .reduce((left, val) -> left + val,
+//                        (left, right) -> right-left );
+//
+//        System.out.println(sum); //output 60
+//    }
 //    public static void main(String[] args) {
 //
 //        System.out.println(collect1);
