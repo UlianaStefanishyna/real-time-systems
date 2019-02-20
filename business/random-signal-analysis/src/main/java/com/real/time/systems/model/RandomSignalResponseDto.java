@@ -11,4 +11,5 @@ public class RandomSignalResponseDto {
     private List<Point> points;
     private double mathematicalExpectation;
     private double dispersion;
+    private String rgb;
 }

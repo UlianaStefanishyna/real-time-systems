@@ -21,23 +21,33 @@ public class RandomSignalServiceImpl implements RandomSignalService {
     @Override
     public RandomSignalResponseDto calculate(int amountOfHarmonic, int pointsAmount, double frequency) {
 
+        double diff = frequency / amountOfHarmonic;
         List<Harmonic> harmonics = IntStream.rangeClosed(1, amountOfHarmonic).mapToObj(h -> Harmonic.builder()
-                .amplitude(ThreadLocalRandom.current().nextDouble(0.1, 100.))
+                .amplitude(ThreadLocalRandom.current().nextDouble(0, 1))
                 .phase(ThreadLocalRandom.current().nextDouble(0, 360))
+                .frequency(diff * h)
                 .build()).collect(toList());
+        log.info("harmonics={}", harmonics);
 
+        List<Double> rgb = new ArrayList<>();
         List<Point> points = IntStream.rangeClosed(0, pointsAmount)
                 .mapToObj(time -> Point.builder().time(time).value(harmonics.stream()
-                .mapToDouble(v -> v.getAmplitude() * Math.sin(frequency * time + v.getPhase())).sum()).build())
+                        .mapToDouble(v -> {
+                            double sum = v.getAmplitude() * Math.sin(v.getFrequency() * time + v.getPhase());
+                            rgb.add(Math.abs(sum * 255));
+                            return sum;
+                        })
+                        .average().getAsDouble()).build())
                 .collect(toList());
 
-        double mathExpectation = points.stream()
-                .mapToDouble(Point::getValue).sum() / (pointsAmount + 1);
+        double mathExpectation = points.stream().mapToDouble(Point::getValue).sum() / (pointsAmount + 1);
         double dispersion = points.stream()
                 .mapToDouble(p -> Math.pow(mathExpectation - p.getValue(), 2)).sum() / pointsAmount;
 
         return RandomSignalResponseDto.builder()
-                .points(points).mathematicalExpectation(mathExpectation).dispersion(dispersion).build();
+                .points(points).mathematicalExpectation(mathExpectation).dispersion(dispersion)
+                .rgb("rgb(" + Math.round(rgb.get(0)) + "," + Math.round(rgb.get(1)) + "," + Math.round(rgb.get(2)) + ")")
+                .build();
     }
 
 //    public static void main(String[] args) {

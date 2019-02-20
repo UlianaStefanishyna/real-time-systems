@@ -8,4 +8,5 @@ import lombok.Data;
 public class Harmonic {
     private double amplitude;
     private double phase;
+    private double frequency;
 }

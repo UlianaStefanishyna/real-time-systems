@@ -20,6 +20,8 @@ function autoFill() {
         var mathE = [];
         console.log(xhr.responseText);
         var jsonData = JSON.parse(xhr.responseText);
+        var rgb = jsonData.rgb;
+        console.log("colors : " + rgb)
         for (var i = 0; i < jsonData.points.length; i++) {
             var point = jsonData.points[i];
             arr.push({
@@ -51,6 +53,7 @@ function autoFill() {
 
             data: [
                 {
+                    color: rgb,
                     type: "area", // "area", "column"
                     dataPoints: arr
                 },
