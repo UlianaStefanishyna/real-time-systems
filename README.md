@@ -12,8 +12,9 @@
 ### Mathematical expectation of the signal
 # <img src="https://raw.githubusercontent.com/UlianaStefanishyna/attachments-recource/master/image/signal-analisys.png" height="400" width="500"/>
 
-Launch: http://localhost:8080/
-#Result:
+Launch: http://localhost:8080
+
+##Result:
 # <img src="https://raw.githubusercontent.com/UlianaStefanishyna/attachments-recource/master/image/result_lab1.jpg" height="100%" width="100%" align="middle"/>
 ### Used technologies:
 
