@@ -15,8 +15,9 @@ function autoFill() {
     console.log(body);
     xhr.send(body);
 
-    xhr.onreadystatechange = (e) =>{
+    xhr.onreadystatechange = (e) =>    {
         var arr = [];
+        var mathE = [];
         console.log(xhr.responseText);
         var jsonData = JSON.parse(xhr.responseText);
         for (var i = 0; i < jsonData.points.length; i++) {
@@ -26,18 +27,38 @@ function autoFill() {
                 x: point.time,
                 y: point.value
             });
+            mathE.push({
+                label: point.time,
+                x: point.time,
+                y: jsonData.mathematical_expectation
+            });
         }
         document.getElementById("math").value = jsonData.mathematical_expectation;
         document.getElementById("disp").value = jsonData.dispersion;
         console.log(arr);
         var chart1 = new CanvasJS.Chart("chartContainer", {
+
+            axisX: {
+                tickColor: "red",
+                title: "time, t"
+            },
+            axisY: {
+                title: "function, x(t)"
+            },
             title: {
                 text: "Harmonics data"
             },
-            data: [{
-                type: "area", // "area", "column"
-                dataPoints: arr
-            }]
+
+            data: [
+                {
+                    type: "area", // "area", "column"
+                    dataPoints: arr
+                },
+                {
+                    type: "line",
+                    dataPoints: mathE
+                }
+            ]
         });
         chart1.render();
     }
