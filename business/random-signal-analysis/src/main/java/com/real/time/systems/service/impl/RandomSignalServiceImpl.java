@@ -1,64 +1,58 @@
 package com.real.time.systems.service.impl;
 
+import com.real.time.systems.model.Harmonic;
 import com.real.time.systems.model.Point;
 import com.real.time.systems.model.RandomSignalResponseDto;
 import com.real.time.systems.service.RandomSignalService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.BiFunction;
 import java.util.stream.*;
 
+import static java.util.stream.Collectors.*;
+
 @Slf4j
 @Service
 public class RandomSignalServiceImpl implements RandomSignalService {
+
     @Override
     public RandomSignalResponseDto calculate(int amountOfHarmonic, int pointsAmount, double frequency) {
+
+        List<Harmonic> harmonics = IntStream.rangeClosed(1, amountOfHarmonic).mapToObj(h -> Harmonic.builder()
+                .amplitude(ThreadLocalRandom.current().nextDouble(0.1, 100.))
+                .phase(ThreadLocalRandom.current().nextDouble(0, 360))
+                .build()).collect(toList());
+
+        List<Point> points = IntStream.rangeClosed(0, pointsAmount)
+                .mapToObj(time -> Point.builder().time(time).value(harmonics.stream()
+                .mapToDouble(v -> v.getAmplitude() * Math.sin(frequency * time + v.getPhase())).sum()).build())
+                .collect(toList());
+
+        double mathExpectation = points.stream()
+                .mapToDouble(Point::getValue).sum() / (pointsAmount + 1);
+        double dispersion = points.stream()
+                .mapToDouble(p -> Math.pow(mathExpectation - p.getValue(), 2)).sum() / pointsAmount;
+
         return RandomSignalResponseDto.builder()
-                .points(IntStream.rangeClosed(0, pointsAmount).mapToObj(time -> {
-                    double sum = IntStream.rangeClosed(1, amountOfHarmonic)
-                            .mapToDouble(p -> calculateHarmonic.apply(frequency, time)).sum();
-                    return Point.builder().value(sum).time(time).build();
-                }).collect(Collectors.toList())).build();
+                .points(points).mathematicalExpectation(mathExpectation).dispersion(dispersion).build();
     }
 
-    private BiFunction<Double, Integer, Double> calculateHarmonic = (frequency, time) -> {
-        double amplitude = ThreadLocalRandom.current().nextDouble(0.1, 10.0);
-        double phase = ThreadLocalRandom.current().nextDouble(0, 360);
-        return amplitude * Math.sin(frequency * time + phase);
-    };
-
-//    public static void main(String[] args) {
-//        List<Integer> numbers = Arrays.asList(1, 2, 3);
-//
-//        // 1*10 + 2*10 + 3*10
-//        Optional<Integer> sum = numbers.stream()
-//                .reduce((left, val) -> left + val,
-//                        (left, right) -> right-left );
-//
-//        System.out.println(sum); //output 60
-//    }
 //    public static void main(String[] args) {
 //
-//        System.out.println(collect1);
-//        List<Harmonic> harmonics = new ArrayList<>();
-//        List<Point> points = new ArrayList<>();
+//        List<Harmonic> harmonics = IntStream.rangeClosed(0, 4).mapToObj(h -> Harmonic.builder()
+//                .amplitude(h)
+//                .phase(h + 1).build()).collect(toList());
+//        System.out.println("harmonics : " + harmonics);
 //
-//        for (int t = 0; t < pointsAmount; t++) {
-//            double xi = 0;
-//            harmonics.clear();
-//            for (int j = 0; j < amountOfHarmonic; j++) {
-//                double amplitude = ThreadLocalRandom.current().nextDouble(0.1, Double.MAX_VALUE);
-//                double phase = ThreadLocalRandom.current().nextDouble(0., 360);
-//                xi += amplitude * Math.sin(frequency * t * phase);
-//                harmonics.add(Harmonic.builder().amplitude(amplitude).phase(phase).time(t).build());
-//            }
-//            points.add(Point.builder().harmonics(harmonics).value(xi).build());
-//        }
-//        return RandomSignalResponseDto.builder().points(points).build();
+//        List<Point> points = IntStream.rangeClosed(0, 6).mapToObj(time -> {
+//            double sum = harmonics.stream()
+//                    .mapToDouble(v -> v.getAmplitude() * v.getPhase() + time).sum();
+//            System.out.println("sum : " + sum);
+//            return Point.builder().time(time).value(sum).build();
+//        }).collect(toList());
+//        System.out.println("points : " + points);
 //    }
 }

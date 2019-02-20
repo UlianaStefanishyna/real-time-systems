@@ -1,14 +1,14 @@
 <!DOCTYPE HTML>
 <html lang="EN">
 <head>
-    <script type="text/javascript"> src="request.js"</script>
+    <script type="text/javascript" src="./request.js"></script>
     <title>chart</title>
 </head>
 <body>
 <a href="#" onClick="autoFill(); return true;">Click to draw the chart according to input data</a>
 <form>
     <p>
-        <label>Amount of harmonics: &#8195;</label>
+        <label>Amount of harmonics:  &#8195;</label>
         <input value="14" type="number" id="input1" width="10">
     </p>
     <p>
@@ -18,6 +18,15 @@
     <p>
         <label>Amount of points: &#8195;&#8195;&#8195;</label>
         <input value="256" type="number" id="input3" maxlength="20">
+    </p>
+        <label>Math expectation: &#8195;&#8195;&#8195;</label>
+        <input value="0" type="number" id="math" maxlength="15" disabled>
+    <p>
+    </p>
+        <label>Dispersion:&#8195;&#8195;&#8195;&#8195;&#8195;&#8195;</label>
+        <input value="0" type="number" id="disp" maxlength="15" disabled>
+    <p>
+
     </p>
 </form>
 <div id="chartContainer" style="height: 370px; width: 100%;"></div>

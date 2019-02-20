@@ -27,6 +27,8 @@ function autoFill() {
                 y: point.value
             });
         }
+        document.getElementById("math").value = jsonData.mathematical_expectation;
+        document.getElementById("disp").value = jsonData.dispersion;
         console.log(arr);
         var chart1 = new CanvasJS.Chart("chartContainer", {
             title: {
