@@ -27,7 +27,6 @@ public class RandomSignalServiceImpl implements RandomSignalService {
                 .phase(ThreadLocalRandom.current().nextDouble(0, 360))
                 .frequency(diff * h)
                 .build()).collect(toList());
-        log.info("harmonics={}", harmonics);
 
         List<Double> rgb = new ArrayList<>();
         List<Point> points = IntStream.rangeClosed(0, pointsAmount)
@@ -36,8 +35,7 @@ public class RandomSignalServiceImpl implements RandomSignalService {
                             double sum = v.getAmplitude() * Math.sin(v.getFrequency() * time + v.getPhase());
                             rgb.add(Math.abs(sum * 255));
                             return sum;
-                        })
-                        .average().getAsDouble()).build())
+                        }).average().orElseThrow()).build())
                 .collect(toList());
 
         double mathExpectation = points.stream().mapToDouble(Point::getValue).sum() / (pointsAmount + 1);
@@ -49,20 +47,4 @@ public class RandomSignalServiceImpl implements RandomSignalService {
                 .rgb("rgb(" + Math.round(rgb.get(0)) + "," + Math.round(rgb.get(1)) + "," + Math.round(rgb.get(2)) + ")")
                 .build();
     }
-
-//    public static void main(String[] args) {
-//
-//        List<Harmonic> harmonics = IntStream.rangeClosed(0, 4).mapToObj(h -> Harmonic.builder()
-//                .amplitude(h)
-//                .phase(h + 1).build()).collect(toList());
-//        System.out.println("harmonics : " + harmonics);
-//
-//        List<Point> points = IntStream.rangeClosed(0, 6).mapToObj(time -> {
-//            double sum = harmonics.stream()
-//                    .mapToDouble(v -> v.getAmplitude() * v.getPhase() + time).sum();
-//            System.out.println("sum : " + sum);
-//            return Point.builder().time(time).value(sum).build();
-//        }).collect(toList());
-//        System.out.println("points : " + points);
-//    }
 }

@@ -18,7 +18,6 @@ function autoFill() {
     xhr.onreadystatechange = (e) =>    {
         var arr = [];
         var mathE = [];
-        console.log(xhr.responseText);
         var jsonData = JSON.parse(xhr.responseText);
         var rgb = jsonData.rgb;
         console.log("colors : " + rgb)
@@ -54,7 +53,7 @@ function autoFill() {
             data: [
                 {
                     color: rgb,
-                    type: "area", // "area", "column"
+                    type: "area",
                     dataPoints: arr
                 },
                 {
