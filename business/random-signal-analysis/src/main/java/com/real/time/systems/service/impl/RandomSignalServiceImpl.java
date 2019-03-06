@@ -41,10 +41,23 @@ public class RandomSignalServiceImpl implements RandomSignalService {
         double mathExpectation = points.stream().mapToDouble(Point::getValue).sum() / (pointsAmount + 1);
         double dispersion = points.stream()
                 .mapToDouble(p -> Math.pow(mathExpectation - p.getValue(), 2)).sum() / pointsAmount;
+        List<Point> autoCorrelation = this.calculateAutoCorrelation(mathExpectation, points);
 
         return RandomSignalResponseDto.builder()
-                .points(points).mathematicalExpectation(mathExpectation).dispersion(dispersion)
+                .points(autoCorrelation)
+                .mathematicalExpectation(mathExpectation)
+                .dispersion(dispersion)
                 .rgb("rgb(" + Math.round(rgb.get(0)) + "," + Math.round(rgb.get(1)) + "," + Math.round(rgb.get(2)) + ")")
                 .build();
+    }
+
+    private List<Point> calculateAutoCorrelation(double mathExpectation, List<Point> points) {
+        return IntStream.range(0, points.size())
+                .mapToObj(tau -> Point.builder().time(tau).value(IntStream.range(0, points.size())
+                        .mapToDouble(time -> (points.get(time).getValue() - mathExpectation) *
+                                (points.get(time + tau >= points.size() - 1 ? points.size() - 1 : time + tau)
+                                        .getValue() - mathExpectation))
+                        .sum()).build())
+                .collect(toList());
     }
 }

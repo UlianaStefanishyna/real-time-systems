@@ -41,13 +41,14 @@ function autoFill() {
 
             axisX: {
                 tickColor: "red",
-                title: "time, t"
+                title: "time, t",
+                reversed: false
             },
             axisY: {
                 title: "function, x(t)"
             },
             title: {
-                text: "Harmonics data"
+                text: "Autocorrelation"
             },
 
             data: [
@@ -55,13 +56,42 @@ function autoFill() {
                     color: rgb,
                     type: "area",
                     dataPoints: arr
-                },
-                {
-                    type: "line",
-                    dataPoints: mathE
                 }
+                // ,
+                // {
+                //     type: "line",
+                //     dataPoints: mathE
+                // }
+            ]
+        });
+
+        var chart2 = new CanvasJS.Chart("chartContainer1", {
+            axisX: {
+                tickColor: "red",
+                title: "time, t",
+                reversed: false
+            },
+            axisY: {
+                title: "function, x(t)"
+            },
+            title: {
+                text: "Correlation"
+            },
+
+            data: [
+                {
+                    color: rgb,
+                    type: "area",
+                    dataPoints: arr
+                }
+                // ,
+                // {
+                //     type: "line",
+                //     dataPoints: mathE
+                // }
             ]
         });
         chart1.render();
+        chart2.render();
     }
 }
