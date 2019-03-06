@@ -26,7 +26,9 @@ public class RandomSignalController {
     @PostMapping
     public ResponseEntity<?> draw(@RequestBody @Valid RandomSignalRequestDto request){
         log.info("input data : {}", request);
-        return ResponseEntity.ok(this.randomSignalService
-                .calculate(request.getAmountOfHarmonic(), request.getPointsAmount(), request.getFrequency()));
+        RandomSignalResponseDto calculatedResponse = this.randomSignalService
+                .calculate(request.getAmountOfHarmonic(), request.getPointsAmount(), request.getFrequency());
+        System.out.println("data calculated");
+        return ResponseEntity.ok(calculatedResponse);
     }
 }
