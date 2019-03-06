@@ -75,7 +75,7 @@ function autoFill() {
                 title: "function, x(t)"
             },
             title: {
-                text: "Correlation"
+                text: "Mutual correlation"
             },
 
             data: [
