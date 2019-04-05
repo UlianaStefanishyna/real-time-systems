@@ -116,7 +116,7 @@ public class RandomSignalServiceImpl implements RandomSignalService {
                             double sum = v.getAmplitude() * Math.sin(v.getFrequency() * time + v.getPhase());
                             rgb.add(Math.abs(sum * 255));
                             return sum;
-                        }).average().orElseThrow()).build())
+                        }).average().orElseThrow(() -> new RuntimeException(""))).build())
                 .collect(toList());
     }
 
